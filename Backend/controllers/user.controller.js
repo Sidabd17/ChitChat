@@ -80,8 +80,10 @@ const login = async (req, res)=>{
         const token = await jwt.sign({ id: user._id }, process.env.JWT_SECRET_KEY, { expiresIn: '7d' });
         
         return res.status(200).cookie('token', token ,{
+            maxAge: 7 * 24 * 60 * 60 * 1000, // 1 day
             httpOnly: true,
-            sameSite: 'strict'
+            secure: true,               // ✅ Important for HTTPS
+            sameSite: "None"  
         }).json({
             message: "User logged in successfully",
             success: true,
