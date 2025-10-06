@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom'
 import './App.css'
 import { Button } from './components/ui/button'
 import Login from './pages/login'
@@ -9,6 +9,8 @@ import { useSelector } from 'react-redux'
 import { connectSocket, getSocket } from './utils/Socket'
 import useSocketListener from './hooks/useSocketListener'
 import Profile from './pages/Profile'
+import RedirectHandler from './AppComponents/RedirectHandler'
+
 
 function App() {
   const user = useSelector((state) => state.auth.user);
@@ -51,6 +53,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
+        <RedirectHandler user={user} />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />

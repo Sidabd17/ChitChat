@@ -1,17 +1,30 @@
 import { Button } from '@/components/ui/button'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import CreateGroupDialog from './CreateGroupDialog';
 import { useSelector } from 'react-redux';
 import useGetMyGroups from '@/hooks/useGetMyGroups';
 import Group from './Group';
 
 const Groups = ({ activeTab }) => {
-
+    
+    const {searchValue} = useSelector((state) => state.auth);
     const myGroups = useSelector((state) => state.group.myGroups);
+
+    const [filteredGroups, setFilteredGroups] = useState(myGroups);
 
     useGetMyGroups();
 
     const [open, setOpen] = useState(false);
+
+    useEffect(() => {
+        if(!searchValue) {
+            setFilteredGroups(myGroups);
+        } else {
+            setFilteredGroups(
+                myGroups.filter(group => group.name.toLowerCase().includes(searchValue.toLowerCase()))
+            );
+        }
+    }, [searchValue, myGroups]);
 
     return (
         <>
@@ -22,7 +35,7 @@ const Groups = ({ activeTab }) => {
             </div>
 
             <div className="mt-2 flex flex-col gap-1 overflow-y-auto w-full max-w-md">
-                {myGroups.map((group) => (
+                {filteredGroups.map((group) => (
                     <Group key={group._id} group={group} />
                 ))}
             </div>

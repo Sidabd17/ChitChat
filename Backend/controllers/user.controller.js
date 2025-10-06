@@ -77,10 +77,10 @@ const login = async (req, res)=>{
             return res.status(401).json({message: "Invalid credentials"});
         }
 
-        const token = await jwt.sign({ id: user._id }, process.env.JWT_SECRET_KEY, { expiresIn: '7d' });
+        const token = await jwt.sign({ id: user._id }, process.env.JWT_SECRET_KEY, { expiresIn: '2d' });
         
         return res.status(200).cookie('token', token ,{
-            maxAge: 7 * 24 * 60 * 60 * 1000, // 1 day
+            maxAge: 2 * 24 * 60 * 60 * 1000, // 2 days
             httpOnly: true,
             secure: true,               // ✅ Important for HTTPS
             sameSite: "None"  

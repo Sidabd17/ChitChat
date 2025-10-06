@@ -21,7 +21,7 @@ const useGetOtherUsers = ()=>{
                 }
 
             } catch (error) {
-                toast.error("Error fetching other users", error.message);
+                // toast.error("Error fetching other users", error.message);
                 console.error("Error fetching other users:", error);
             }
         }

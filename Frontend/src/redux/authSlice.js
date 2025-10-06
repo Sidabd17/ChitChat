@@ -5,6 +5,7 @@ const initialState = {
   otherUsers: [],
   selectedUser: null,
   selectedprofile: null,
+  searchValue: "",
 };
 
 const authSlice = createSlice({
@@ -23,9 +24,12 @@ const authSlice = createSlice({
     setSelectedprofile: (state, action) => {
       state.selectedprofile = action.payload;
     },
+    setSearchValue: (state, action) => {
+      state.searchValue = action.payload;
+    }
   },
 });
 
-export const { setUser, setOtherUsers, setSelectedUser, setSelectedprofile } = authSlice.actions;
+export const { setUser, setOtherUsers, setSelectedUser, setSelectedprofile, setSearchValue } = authSlice.actions;
 
 export default authSlice.reducer;
