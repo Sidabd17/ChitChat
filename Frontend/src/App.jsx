@@ -15,6 +15,8 @@ import RedirectHandler from './AppComponents/RedirectHandler'
 function App() {
   const user = useSelector((state) => state.auth.user);
 
+  console.log("App component - user:", user);
+
   useEffect(() => {
     if(user && user?.id) {
       // console.log("Connecting socket for userId:", user?.id);
@@ -53,7 +55,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <RedirectHandler user={user} />
+        {/* <RedirectHandler user={user} /> */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
