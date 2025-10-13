@@ -12,28 +12,28 @@ const Home = () => {
 
   const navigate = useNavigate();
 
-  useEffect(()=>{
-    if(!user) navigate('/login');
-    
-    const token = document.cookie
-      .split('; ')
-      .find(row => row.startsWith('token='))
-      ?.split('=')[1];
+  // useEffect(()=>{
+  //   if(!user) navigate('/login');
 
-    if (token) {
-      try {
-        const decoded = jwtDecode(token);
-        const now = Date.now() / 1000;
-        if (decoded.exp < now) {
-          navigate('/login');
-        }
-      } catch {
-        navigate('/login');
-      }
-    } else {
-      navigate('/login');
-    }
-  }, [navigate, user]);
+  //   const token = document.cookie
+  //     .split('; ')
+  //     .find(row => row.startsWith('token='))
+  //     ?.split('=')[1];
+
+  //   if (token) {
+  //     try {
+  //       const decoded = jwtDecode(token);
+  //       const now = Date.now() / 1000;
+  //       if (decoded.exp < now) {
+  //         navigate('/login');
+  //       }
+  //     } catch {
+  //       navigate('/login');
+  //     }
+  //   } else {
+  //     navigate('/login');
+  //   }
+  // }, [navigate, user]);
 
   return (
 
